@@ -10,6 +10,7 @@ import com.facebook.Session;
 import com.facebook.Session.StatusCallback;
 import com.facebook.SessionState;
 import com.facebook.internal.SessionTracker;
+import com.facebook.model.GraphObject;
 import com.facebook.model.GraphUser;
 import com.facebook.widget.LoginButton;
 
@@ -19,23 +20,29 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.TextView;
 
 import org.json.*;
+
 import com.loopj.android.http.*;
 
 public class MainActivity extends Activity implements StatusCallback, GraphUserCallback {
 
 	private LoginButton button;
+	private TextView loaderText;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		button = (LoginButton)findViewById(R.id.loginButton1);
+		loaderText = (TextView)findViewById(R.id.loaderText);
 		
 		Session s = Session.getActiveSession();
-		if(s != null)
+		if(s != null){
 			s.closeAndClearTokenInformation();
+			Log.d("", "closed and cleared token info");
+		}
 		
 //		if(isOpen(s))
 //			loadMainScreen();
@@ -85,17 +92,16 @@ public class MainActivity extends Activity implements StatusCallback, GraphUserC
 
 	@Override
 	public void call(Session session, SessionState state, Exception exception) {
-		Log.d("", "called");
+		
 		if(session != null && session.isOpened()){
+			Log.d("", "logged");
+			List<String> perms = session.getPermissions();
+			String str = "My permissions: ";
+			for(String s : perms)
+				str += s + ",";
+			Log.d("", str);
 			requestUserData();
-//			button.setVisibility(View.INVISIBLE);
-			
-//			Log.d("", "logged");
-//			loadMainScreen();
 		} else{
-//			Log.d("", "session: " + session);
-//			Log.d("", "open? " + session.isOpened());
-			
 		}
 		
 	}
@@ -106,6 +112,7 @@ public class MainActivity extends Activity implements StatusCallback, GraphUserC
 		setVisible(R.id.loaderText, true);
 		setVisible(R.id.loginButton1, false);
 		setVisible(R.id.textView1, false);
+		loaderText.setText("Buscando dados do Facebook...");
 		
 		Session s = Session.getActiveSession();
 		Request r = Request.newMeRequest(s, this);
@@ -125,48 +132,39 @@ public class MainActivity extends Activity implements StatusCallback, GraphUserC
 		//user data obtained
 		MainScreen.meUser = user;
 		
-		String id = user.getId();
-		AsyncHttpClient client = new AsyncHttpClient();
-		RequestParams params = new RequestParams();
-		params.put("user[name]", user.getName());
-		params.put("user[email]", "E-M-A-I-L");
-		params.put("user[phone]", "2222222");
-		params.put("user[facebook_id]", id);
+		Request r = new Request(Session.getActiveSession(), "/me?fields=email");
 		
-		String url = "http://hackathon1746.herokuapp.com/users/connect.json";
-		
-		
-		client.post(url, new AsyncHttpResponseHandler(){
-			
+		r.setCallback(new Request.Callback() {
 			@Override
-			public void onSuccess(String arg0){
-				Log.d("", "post response: " + arg0);
+			public void onCompleted(Response response) {
+				//e-mail retrieved
+				GraphObject obj = response.getGraphObject();
+				Log.d("", "response: " + response.toString());
+				String email = "teste@teste.com";
+				if(obj != null){
+					email = (String)obj.getProperty("email");
+					Log.d("", "email: " + email);
+				}
+				
+				FetchTask task = FetchTask.connectTask("mateus", "a@b.c", "222", "123123", new FetchCallback() {
+//					
+					@Override
+					public void onResult(boolean success, JSONObject response) {
+						if(success)
+							on1746UserRetrieved(response);
+					}
+				});
+				loaderText.setText("Buscando cadastro no 1746...");
+				task.execute();
 			}
-			
-			@Override
-		     public void onFailure(Throwable e, String response) {
-		         Log.d("", "post error! " + e.getMessage());
-		     }
 		});
-		
-//		url = "http://hackathon1746.herokuapp.com/neighborhoods/list.json";
-//		client.get(url, new AsyncHttpResponseHandler(){
-//		@Override
-//		public void onSuccess(String arg0){
-//			Log.d("", "post response: " + arg0);
-//		}
-//	});
-		
-		Log.d("", "posting!");
+		loaderText.setText("Buscando e-mail do Facebook...");
+		r.executeAsync();
+	}
+	
+	public void on1746UserRetrieved(JSONObject user){
 		
 		loadMainScreen();
 	}
-
-//	@Override
-//	public boolean onCreateOptionsMenu(Menu menu) {
-//		// Inflate the menu; this adds items to the action bar if it is present.
-//		getMenuInflater().inflate(R.menu.main, menu);
-//		return true;
-//	}
 
 }
