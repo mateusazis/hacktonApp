@@ -4,5 +4,6 @@
     <string name="app_name">Hackton App</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="app_id">706057742743084</string>
 
 </resources>
