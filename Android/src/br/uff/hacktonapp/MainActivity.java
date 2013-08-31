@@ -39,10 +39,10 @@ public class MainActivity extends Activity implements StatusCallback, GraphUserC
 		loaderText = (TextView)findViewById(R.id.loaderText);
 		
 		Session s = Session.getActiveSession();
-		if(s != null){
-			s.closeAndClearTokenInformation();
-			Log.d("", "closed and cleared token info");
-		}
+//		if(s != null){
+//			s.closeAndClearTokenInformation();
+//			Log.d("", "closed and cleared token info");
+//		}
 		
 //		if(isOpen(s))
 //			loadMainScreen();
@@ -163,7 +163,6 @@ public class MainActivity extends Activity implements StatusCallback, GraphUserC
 	}
 	
 	public void on1746UserRetrieved(JSONObject user){
-		
 		loadMainScreen();
 	}
 

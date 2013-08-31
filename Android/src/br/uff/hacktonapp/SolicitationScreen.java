@@ -3,6 +3,7 @@ package br.uff.hacktonapp;
 import android.app.*;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 
 public class SolicitationScreen extends Activity{
@@ -17,7 +18,26 @@ public class SolicitationScreen extends Activity{
 		setContentView(R.layout.solicitation_layout);
 		
 		picturePreview = (ImageView)findViewById(R.id.solicitationPreview);
-		picturePreview.setImageBitmap(pictureBitmap);
+		if(pictureBitmap != null)
+			picturePreview.setImageBitmap(pictureBitmap);
+		
 	}
+	
+	public void makeStreetRequest(View v){
+		
+	}
+	
+	public void makeLightRequest(View v){
+		
+	}
+
+	public void makeParkingRequest(View v){
+		
+	}
+	
+	public void makeTreeRequest(View v){
+		
+	}
+	
 	
 }

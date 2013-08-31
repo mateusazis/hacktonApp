@@ -16,42 +16,92 @@
         android:src="@drawable/ic_launcher" />
 
     <RelativeLayout
+        android:id="@+id/relativeLayout1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="17dp" >
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/textView1"
+        android:layout_margin="10sp"
+        android:background="@drawable/round_rect_white" >
 
-        <Button
-            android:id="@+id/treeButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Button" />
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical" >
 
-        <Button
-            android:id="@+id/Button01"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:text="Button" />
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.5"
+                android:orientation="horizontal" >
 
-        <Button
-            android:id="@+id/Button02"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:text="Button" />
+                <Button
+                    android:id="@+id/Button04"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_margin="10sp"
+                    android:layout_weight="0.5"
+                    android:background="@drawable/round_rect"
+                    android:drawableTop="@drawable/pole"
+                    android:onClick="makeLightRequest"
+                    android:paddingTop="10dp"
+                    android:text="Iluminação pública" />
 
-        <Button
-            android:id="@+id/Button03"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:text="Button" />
+                <Button
+                    android:id="@+id/Button02"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_margin="10dp"
+                    android:layout_weight="0.5"
+                    android:background="@drawable/round_rect"
+                    android:drawableTop="@drawable/asphalt"
+                    android:onClick="makeStreetRequest"
+                    android:paddingTop="10dp"
+                    android:text="Conservação de vias" />
+            </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.5"
+                android:orientation="horizontal" >
+
+                <Button
+                    android:id="@+id/Button01"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_margin="10sp"
+                    android:layout_weight="0.5"
+                    android:background="@drawable/round_rect"
+                    android:drawableTop="@drawable/no_parking"
+                    android:onClick="makeParkingRequest"
+                    android:paddingTop="10dp"
+                    android:text="Estacionamento irregular" />
+
+                <Button
+                    android:id="@+id/Button03"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_margin="10sp"
+                    android:layout_weight="0.5"
+                    android:background="@drawable/round_rect"
+                    android:drawableTop="@drawable/tree"
+                    android:onClick="makeTreeRequest"
+                    android:paddingTop="10dp"
+                    android:text="Poda de Árvores" />
+            </LinearLayout>
+        </LinearLayout>
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/solicitationPreview"
+        android:layout_alignLeft="@+id/relativeLayout1"
+        android:text="Selecione o tipo de serviço:"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>

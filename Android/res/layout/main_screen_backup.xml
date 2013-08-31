@@ -120,7 +120,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <ProgressBar
-                android:id="@+id/progressBar1"
+                android:id="@+id/localizationBar"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -131,7 +131,7 @@
                 android:id="@+id/percentageText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/progressBar1"
+                android:layout_alignBottom="@+id/localizationBar"
                 android:layout_centerHorizontal="true"
                 android:gravity="center_vertical|center_horizontal"
                 android:text="45% "
