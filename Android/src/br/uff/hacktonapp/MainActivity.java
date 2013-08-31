@@ -20,6 +20,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 
+import org.json.*;
+import com.loopj.android.http.*;
+
 public class MainActivity extends Activity implements StatusCallback, GraphUserCallback {
 
 	private LoginButton button;
@@ -34,8 +37,11 @@ public class MainActivity extends Activity implements StatusCallback, GraphUserC
 		if(s != null)
 			s.closeAndClearTokenInformation();
 		
+//		if(isOpen(s))
+//			loadMainScreen();
+//		else
 		if(isOpen(s))
-			loadMainScreen();
+			requestUserData();
 		else
 			setupLogin();
 	}
@@ -51,10 +57,9 @@ public class MainActivity extends Activity implements StatusCallback, GraphUserC
 		Log.d("", "setup login");
 		
 		List<String> permissions = Arrays.asList("email");
-//		
+		
 		button.setReadPermissions(permissions);
 		button.setSessionStatusCallback(this);
-//		s.addCallback(this);
 
 		setVisible(R.id.loader1, false);
 		setVisible(R.id.loaderText, false);
@@ -69,7 +74,7 @@ public class MainActivity extends Activity implements StatusCallback, GraphUserC
 	private void loadMainScreen(){
 		Log.d("", "load main screen");
 		Intent i = new Intent(this, MainScreen.class);
-//		i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+
 		super.getIntent().addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 		startActivity(i);
 	}
@@ -84,20 +89,23 @@ public class MainActivity extends Activity implements StatusCallback, GraphUserC
 		if(session != null && session.isOpened()){
 			requestUserData();
 //			button.setVisibility(View.INVISIBLE);
-			button.setEnabled(false);
+			
 //			Log.d("", "logged");
 //			loadMainScreen();
 		} else{
-			Log.d("", "session: " + session);
-			Log.d("", "open? " + session.isOpened());
+//			Log.d("", "session: " + session);
+//			Log.d("", "open? " + session.isOpened());
 			
 		}
 		
 	}
 	
 	private void requestUserData(){
+		button.setEnabled(false);
 		setVisible(R.id.loader1, true);
 		setVisible(R.id.loaderText, true);
+		setVisible(R.id.loginButton1, false);
+		setVisible(R.id.textView1, false);
 		
 		Session s = Session.getActiveSession();
 		Request r = Request.newMeRequest(s, this);
@@ -114,7 +122,43 @@ public class MainActivity extends Activity implements StatusCallback, GraphUserC
 
 	@Override
 	public void onCompleted(GraphUser user, Response response) {
+		//user data obtained
 		MainScreen.meUser = user;
+		
+		String id = user.getId();
+		AsyncHttpClient client = new AsyncHttpClient();
+		RequestParams params = new RequestParams();
+		params.put("user[name]", user.getName());
+		params.put("user[email]", "E-M-A-I-L");
+		params.put("user[phone]", "2222222");
+		params.put("user[facebook_id]", id);
+		
+		String url = "http://hackathon1746.herokuapp.com/users/connect.json";
+		
+		
+		client.post(url, new AsyncHttpResponseHandler(){
+			
+			@Override
+			public void onSuccess(String arg0){
+				Log.d("", "post response: " + arg0);
+			}
+			
+			@Override
+		     public void onFailure(Throwable e, String response) {
+		         Log.d("", "post error! " + e.getMessage());
+		     }
+		});
+		
+//		url = "http://hackathon1746.herokuapp.com/neighborhoods/list.json";
+//		client.get(url, new AsyncHttpResponseHandler(){
+//		@Override
+//		public void onSuccess(String arg0){
+//			Log.d("", "post response: " + arg0);
+//		}
+//	});
+		
+		Log.d("", "posting!");
+		
 		loadMainScreen();
 	}
 

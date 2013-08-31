@@ -8,7 +8,7 @@
         android:minSdkVersion="8"
         android:targetSdkVersion="8" />
     <uses-permission android:name="android.permission.INTERNET"/>
-
+	<uses-feature android:name="android.hardware.camera" />
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -17,15 +17,24 @@
         <activity
             android:name="br.uff.hacktonapp.MainActivity"
             android:label="@string/app_name" >
+
+            
+            
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            
         </activity>
         <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/app_id"/>
         <activity android:name="com.facebook.LoginActivity"></activity>
-        <activity android:name="br.uff.hacktonapp.MainScreen"></activity>
+        <activity android:name="br.uff.hacktonapp.MainScreen">
+            
+        </activity>
+        
+        <activity
+            android:name="br.uff.hacktonapp.SolicitationScreen" />
     </application>
 
 </manifest>
