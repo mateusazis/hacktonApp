@@ -79,6 +79,10 @@ public class FetchTask extends AsyncTask<Void, Void, JSONObject> {
 				"user[neighborhood_id]", id);
 	}
 	
+	public static FetchTask getNotifications(String fbId, FetchCallback callback) {
+		return new FetchTask("users/notifications.json?facebook=" +fbId, callback, true);
+	}
+	
     @Override
     protected JSONObject doInBackground(Void... params) {
         try {

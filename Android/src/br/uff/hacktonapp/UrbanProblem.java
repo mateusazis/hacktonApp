@@ -2,7 +2,7 @@ package br.uff.hacktonapp;
 
 public class UrbanProblem {
 
-	private static final int [] drawables = {R.drawable.tree, R.drawable.asphalt, R.drawable.pole, R.drawable.no_parking};
+	public static final int [] drawables = {R.drawable.tree, R.drawable.asphalt, R.drawable.pole, R.drawable.no_parking};
 	public RequestType type;
 	public int code;
 	public String description;

@@ -38,24 +38,10 @@
             android:text="@string/hello_world"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <com.facebook.widget.LoginButton
-            xmlns:fb="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/loginButton1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/profileName"
-            android:layout_alignLeft="@+id/levelName"
-            android:layout_alignRight="@+id/level_layout"
-            android:layout_marginBottom="5sp"
-            android:onClick="logout"
-            fb:login_text="Entrar"
-            fb:logout_text="Sair" />
-
         <TextView
             android:id="@+id/levelName"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/loginButton1"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/level_layout"
             android:layout_toRightOf="@+id/profileImage"
@@ -102,6 +88,20 @@
                 android:text="2"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
         </RelativeLayout>
+
+        <com.facebook.widget.LoginButton
+            xmlns:fb="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/loginButton1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/levelName"
+            android:layout_alignRight="@+id/level_layout"
+            android:layout_below="@id/levelName"
+            android:layout_centerVertical="true"
+            android:onClick="logout"
+            fb:login_text="Entrar"
+            fb:logout_text="Sair" />
+
     </RelativeLayout>
 
     <RelativeLayout
