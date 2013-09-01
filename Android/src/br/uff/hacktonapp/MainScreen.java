@@ -122,6 +122,11 @@ public class MainScreen extends Activity implements StatusCallback{
 		selectImage();
 	}
 	
+	public void viewSolicitations(View v){ 
+		Intent i = new Intent(this, SolicitationListScreen.class);
+		startActivity(i);
+	}
+	
 	private static final int REQUEST_CAMERA = 300, SELECT_FILE = 400;
 	
 	private void selectImage() {

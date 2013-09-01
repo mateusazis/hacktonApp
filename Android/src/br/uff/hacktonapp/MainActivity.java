@@ -24,8 +24,6 @@ import android.widget.TextView;
 
 import org.json.*;
 
-import com.loopj.android.http.*;
-
 public class MainActivity extends Activity implements StatusCallback, GraphUserCallback {
 
 	private LoginButton button;
