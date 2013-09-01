@@ -51,4 +51,12 @@
         android:layout_above="@+id/loaderText"
         android:layout_centerHorizontal="true" />
 
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/logo_1746" />
+
 </RelativeLayout>

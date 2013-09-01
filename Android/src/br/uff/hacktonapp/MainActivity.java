@@ -180,7 +180,21 @@ public class MainActivity extends Activity implements StatusCallback, GraphUserC
 	}
 	
 	public void on1746UserRetrieved(JSONObject user){
-		loadMainScreen();
+		Log.d("", "aqui: " + user.toString());
+		
+		try {
+			String levelName = user.getString("level_name");
+			int levelNumber = user.getInt("level");
+			float relativeXp = (float)user.getDouble("xp_relative");
+			MainScreen.userLevelName = levelName;
+			MainScreen.userLevelNumber = levelNumber;
+			MainScreen.userRelativeXP = relativeXp;
+			loadMainScreen();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 }

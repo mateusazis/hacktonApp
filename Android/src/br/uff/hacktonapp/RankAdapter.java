@@ -36,7 +36,7 @@ View row = convertView;
         }
         TextView nameView = (TextView)row.findViewById(R.id.rankName);
         TextView numberView = (TextView)row.findViewById(R.id.rankNumber);
-        TextView levelView = (TextView)row.findViewById(R.id.rankLevel);
+        TextView levelView = (TextView)row.findViewById(R.id.levelName);
         TextView levelNameView = (TextView)row.findViewById(R.id.rankLevelName);
         ImageView pictureView = (ImageView)row.findViewById(R.id.rankPicture);
         

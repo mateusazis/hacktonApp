@@ -38,7 +38,12 @@ public class ConfigScreen extends Activity implements OnItemSelectedListener, Fe
 		h = NeighHelper.getInstance(this);
 		spinner.setAdapter(h.makeAdapter(this));
 //		spinner.setOnItemSelectedListener(this);
-		
+		leftStar.setText(MainScreen.userLevelNumber + "");
+		rightStar.setText((MainScreen.userLevelNumber+1) + "");
+		levelProgress.setMax(100);
+		float newPctg = MainScreen.userRelativeXP * 100;
+		levelProgress.setProgress((int)newPctg);
+		levelPctg.setText(String.format("%.01f", newPctg) + "%");
 		requestNeighboorhood();
 	}
 	
