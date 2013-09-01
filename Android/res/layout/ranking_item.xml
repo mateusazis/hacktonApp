@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ImageView
+        android:id="@+id/rankPicture"
+        android:layout_width="60sp"
+        android:layout_height="60sp"
+        android:layout_alignBottom="@+id/relativeLayout2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_launcher" />
+
+    <TextView
+        android:id="@+id/rankNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/relativeLayout2"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="5sp"
+        android:layout_marginRight="5sp"
+        android:layout_toRightOf="@+id/rankPicture"
+        android:gravity="center_vertical"
+        android:text="1:"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#000000"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/rankName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/relativeLayout2"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/rankNumber"
+        android:gravity="center_vertical"
+        android:text="Mateus Azis"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#000000" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="80sp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true" >
+
+        <TextView
+            android:id="@+id/rankLevelName"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/imageView2"
+            android:gravity="center_horizontal"
+            android:text="Iniciante"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#282828" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="40sp"
+            android:layout_height="40sp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/star" />
+
+        <TextView
+            android:id="@+id/rankLevel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/imageView2"
+            android:layout_alignLeft="@id/imageView2"
+            android:layout_alignRight="@id/imageView2"
+            android:layout_alignTop="@id/imageView2"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="2"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#000000" />
+    </RelativeLayout>
+
+</RelativeLayout>
