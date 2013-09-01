@@ -83,6 +83,16 @@ public class FetchTask extends AsyncTask<Void, Void, JSONObject> {
 		return new FetchTask("users/notifications.json?facebook=" +fbId, callback, true);
 	}
 	
+	public static FetchTask sendFeedback(String userID, float rating,
+			String commentsStr, String requestID,
+			FetchCallback callback) {
+		return new FetchTask("feedbacks/create.json", callback, false,
+				"facebook", userID, 
+				"feedback[score]", rating+"",
+				"feedback[comment]", commentsStr,
+				"request_id", requestID);
+	}
+	
     @Override
     protected JSONObject doInBackground(Void... params) {
         try {
@@ -129,6 +139,8 @@ public class FetchTask extends AsyncTask<Void, Void, JSONObject> {
         if(callback != null)
         	callback.onResult(result != null, result);
     }
+
+	
 
 	
 }

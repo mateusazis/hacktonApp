@@ -288,10 +288,21 @@ public class MainScreen extends Activity implements StatusCallback{
 					String title = "1746 Informa";
 					String msg = obj.getString("description");
 					
+					String requestID = obj.getString("request");
+					JSONArray protocols = obj.getJSONArray("protocols");
 					
 					NotificationCompat.Builder b = new NotificationCompat.Builder(MainScreen.this);
 					b.setSmallIcon(drawable).setContentTitle(title).setContentText(msg);
 					b.setOnlyAlertOnce(true);
+					
+					Intent intent = new Intent(MainScreen.this, FeedbackActivity.class);
+					intent.putExtra("request_id", requestID);
+					intent.putExtra("protocols", asArray(protocols));
+//					
+					PendingIntent pending = PendingIntent.getActivity(MainScreen.this, 0, intent, 0);
+					b.setContentIntent(pending);
+					b.setAutoCancel(true);
+					
 					NotificationManager mNotificationManager =
 						    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 						// mId allows you to update the notification later on.
@@ -301,6 +312,12 @@ public class MainScreen extends Activity implements StatusCallback{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
+		private String [] asArray(JSONArray array) throws JSONException{
+			String [] resp = new String[array.length()];
+			for(int i = 0; i < resp.length; i++)
+				resp[i] = (String)array.getString(i);
+			return resp;
 		}
 		
 		

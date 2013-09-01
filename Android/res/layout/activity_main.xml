@@ -31,7 +31,8 @@
         android:gravity="center_horizontal"
         android:text="Entre com sua conta do Facebook:"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#F3F3F3" />
+        android:textColor="#F3F3F3"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/loaderText"
@@ -55,8 +56,10 @@
         android:id="@+id/imageView1"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:layout_above="@+id/rankNumber"
+        android:layout_alignLeft="@+id/rankNumber"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
+        android:layout_alignRight="@+id/rankNumber"
         android:src="@drawable/logo_1746" />
 
 </RelativeLayout>
