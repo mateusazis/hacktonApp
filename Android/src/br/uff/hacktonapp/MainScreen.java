@@ -109,7 +109,8 @@ public class MainScreen extends Activity{
 	}
 
 	public void viewInfo(View v){
-		Log.d("", "view info");
+		Intent i = new Intent(this, ConfigScreen.class);
+		startActivity(i);
 	}
 	
 	@Override

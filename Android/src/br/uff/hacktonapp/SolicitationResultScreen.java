@@ -13,6 +13,7 @@ import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
@@ -27,6 +28,7 @@ public class SolicitationResultScreen extends Activity implements Callback {
 	private TextView xpText;
 	private ProgressDialog progressDialog;
 	public static String solicitationName;
+	public static String protocol;
 	private static String solicitationPronoum;
 	
 	
@@ -37,14 +39,15 @@ public class SolicitationResultScreen extends Activity implements Callback {
 //		picture = (ImageView)findViewById(R.id.pictureView);
 		xpText = (TextView)findViewById(R.id.xpText);
 		
-		
-		
-		
-		
 		setup();
 	}
 	
 	public void setup(){
+		TextView protocolView = (TextView)findViewById(R.id.protocolTV);
+		
+		protocolView.setText(Html.fromHtml("O protocolo gerado foi: <b>" + protocol + "</b>"));
+		
+		setEarnedXP(20);
 //		Animation rotation = AnimationUtils.loadAnimation(this, R.anim.img_rotation);
 //		picture.startAnimation(rotation);
 //		
@@ -53,7 +56,7 @@ public class SolicitationResultScreen extends Activity implements Callback {
 	}
 	
 	public void setEarnedXP(int value){
-		xpText.setText("Você ganhou +" + value + " pontos!");
+		xpText.setText(Html.fromHtml("Você ganhou <font color=\"red\">+" + value + "</font> pontos!"));
 	}
 	
 	public void share(View v){

@@ -1,174 +1,199 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/scrollView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+   	android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/bg_gradient">
 
-<RelativeLayout 
-    android:layout_width="match_parent"
+<ScrollView
+    android:id="@+id/scrollView1"
+    android:layout_width="wrap_content"
+    android:layout_height="fill_parent"
+    android:layout_weight="0.8" >
+
+<RelativeLayout
+    android:layout_width="323dp"
     android:layout_height="wrap_content"
-    android:background="@drawable/bg_gradient" >
+     >
     
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10sp">
+        android:layout_margin="10sp" >
 
-    
-
-    <EditText
-        android:id="@+id/comments"
-        android:layout_width="fill_parent"
-        android:layout_height="200sp"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/rankNumber"
-        android:ems="10"
-        android:gravity="top"
-        android:hint="(opcional)"
-        android:inputType="textMultiLine" >
-	<Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/comments"
-        android:layout_centerHorizontal="true"
-        android:drawableLeft="@drawable/send"
-        android:onClick="send"
-        android:text="Enviar" />
         <requestFocus />
-    </EditText>
-    
-    <LinearLayout
-        android:id="@+id/relativeLayout1"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_alignParentTop="true" >
 
-        <TextView
-            android:id="@+id/rankLevel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Endereço:"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/streetField"
+        <LinearLayout
+            android:id="@+id/relativeLayout1"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@id/rankLevel"
-            android:ems="10"
-            android:inputType="textPostalAddress" />
+            android:layout_alignParentTop="true"
+            android:orientation="vertical" >
 
-        <LinearLayout 
-            android:layout_width="fill_parent"
-	        android:layout_height="wrap_content"
-	        android:orientation="horizontal">
-	        <TextView
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:text="Número aproximado:"
-	            android:textAppearance="?android:attr/textAppearanceMedium"
-	            android:textStyle="bold" />
+            <TextView
+                android:id="@+id/rankLevel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Endereço:"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textStyle="bold" />
 
-	        <EditText
-	            android:id="@+id/addressNumber"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_weight="1"
-	            android:ems="10"
-	            android:inputType="number" />
+            <EditText
+                android:id="@+id/streetField"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/rankLevel"
+                android:ems="10"
+                android:inputType="textPostalAddress" />
 
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Número aproximado:"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/addressNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="number" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="Bairro:"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textStyle="bold" />
+
+
+                <Spinner
+                    android:id="@+id/neighborhoodSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/neighborhoods" />
+            </LinearLayout>
         </LinearLayout>
-		<LinearLayout 
-            android:layout_width="fill_parent"
-	        android:layout_height="wrap_content"
-	        android:orientation="horizontal">
-
-	        <TextView
-	            android:layout_width="wrap_content"
-	            android:layout_height="match_parent"
-	            android:gravity="center_vertical"
-	            android:text="Bairro:"
-	            android:textAppearance="?android:attr/textAppearanceMedium"
-	            android:textStyle="bold" />
-	        
-     	    <Spinner
-     	        android:id="@+id/neighborhoodSpinner"
-     	        android:layout_width="match_parent"
-     	        android:layout_height="wrap_content"
-     	        android:entries="@array/neighborhoods" />
-
-		</LinearLayout>
-    </LinearLayout>
-
-    <RelativeLayout
-        android:id="@+id/relativeLayout2"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:padding="5sp"
-        android:layout_below="@id/relativeLayout1"
-        android:background="@drawable/round_rect" >
-
-        <TextView
-            android:id="@+id/xpText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Endereço sugerido:"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/localizationButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:enabled="false"
-            android:onClick="useSuggestedLocalization"
-            android:text="Usar" />
-
-        <TextView
-            android:id="@+id/suggestedAddress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/xpText"
-            android:text="Procurando..."
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <ProgressBar
-            android:id="@+id/localizationBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/xpText"
-            android:layout_alignParentTop="true"
-            android:layout_toLeftOf="@+id/localizationButton" />
-    </RelativeLayout>
-
-    <TextView
-        android:id="@+id/rankNumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/relativeLayout2"
-        android:text="Comentários:"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textStyle="bold" />
-
-</RelativeLayout>
-
-    
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_below="@id/relativeLayout1"
             android:orientation="vertical" >
+
+            <RelativeLayout
+                android:id="@+id/relativeLayout2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/round_rect"
+                android:padding="5sp" >
+
+                <TextView
+                    android:id="@+id/xpText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Endereço sugerido:"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/localizationButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:enabled="false"
+                    android:onClick="useSuggestedLocalization"
+                    android:text="Usar" />
+
+                <TextView
+                    android:id="@+id/suggestedAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/xpText"
+                    android:text="Procurando..."
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <ProgressBar
+                    android:id="@+id/localizationBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/xpText"
+                    android:layout_alignParentTop="true"
+                    android:layout_toLeftOf="@+id/localizationButton" />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ponto de referência:"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/refField"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="(opcional)"
+                android:inputType="textPostalAddress" />
+
+            <TextView
+                android:id="@+id/rankNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Comentários:"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/comments"
+                android:layout_width="fill_parent"
+                android:layout_height="200sp"
+                android:ems="10"
+                android:gravity="top"
+                android:hint="(opcional)"
+                android:inputType="textMultiLine" />
+
+            
+
         </LinearLayout>
-    
+    </RelativeLayout>
 
 </RelativeLayout>
 
 </ScrollView>
+<LinearLayout android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/round_rect"
+    android:orientation="vertical"
+    >
+
+<Button
+    android:id="@+id/button1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:drawableLeft="@drawable/send"
+    android:background="#00000000"
+    android:onClick="send"
+    android:text="Enviar" />
+
+</LinearLayout>
+</LinearLayout>

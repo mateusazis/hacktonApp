@@ -4,11 +4,15 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 //import com.google.android.gms.common.*;
 //import com.google.android.gms.common.GooglePlayServicesClient.*;
 //import com.google.android.gms.location.LocationClient;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
@@ -21,20 +25,24 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class SolicitationInfoScreen extends Activity implements OnItemSelectedListener {
+public class SolicitationInfoScreen extends Activity implements OnItemSelectedListener, FetchCallback {
 
 	private ProgressBar addressBar;
 	private Button useButton;
-	private TextView streetField, numberField, commentsField;
+	private EditText streetField, numberField, commentsField, referenceField;
 	private Spinner neighborhoodSpinner;
-	private static String suggestedAddress = null;
+	private ProgressDialog pd;
 	
-	private String [] sortedNeighborhoods;
-	private String [] originalNeighborhoods;
+	
+	private static String suggestedAddress = null;
+	public static RequestType requestType;
 	
 //	private LocationClient client;
 	
@@ -46,21 +54,23 @@ public class SolicitationInfoScreen extends Activity implements OnItemSelectedLi
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.info_layout);
-		streetField = (TextView)findViewById(R.id.streetField);
-		numberField = (TextView)findViewById(R.id.addressNumber);
-		commentsField = (TextView)findViewById(R.id.comments);
+		streetField = (EditText)findViewById(R.id.streetField);
+		numberField = (EditText)findViewById(R.id.addressNumber);
+		commentsField = (EditText)findViewById(R.id.comments);
+		referenceField = (EditText)findViewById(R.id.refField);
 		useButton = (Button)findViewById(R.id.localizationButton);
 		addressBar = (ProgressBar)findViewById(R.id.localizationBar);
 		neighborhoodSpinner = (Spinner)findViewById(R.id.neighborhoodSpinner);
 		
 		
 		
-		originalNeighborhoods = getNeighborHoods(this);
+//		originalNeighborhoods = getNeighborHoods(this);
 //		System.arraycopy(sortedNeighborhoods, 0, originalNeighborhoods, 0, originalNeighborhoods.length);
 //		
 //		Arrays.sort(sortedNeighborhoods);
-		sortedNeighborhoods = getSortedNeighborHoods(originalNeighborhoods);
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, sortedNeighborhoods);
+//		sortedNeighborhoods = getSortedNeighborHoods(originalNeighborhoods);
+		NeighHelper h = NeighHelper.getInstance(this);
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, h.getSorted());
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		neighborhoodSpinner.setAdapter(adapter);
 		neighborhoodSpinner.setOnItemSelectedListener(this);
@@ -68,22 +78,11 @@ public class SolicitationInfoScreen extends Activity implements OnItemSelectedLi
 //		client = new LocationClient(this, listener, listener);
 	}
 	
-	public static String [] getNeighborHoods(Activity act){
-		return act.getResources().getStringArray(R.array.neighborhoods);
-	}
 	
-	public static String [] getSortedNeighborHoods(String [] originals){
-		String resp[] = new String[originals.length];
-		System.arraycopy(originals, 0, resp, 0, originals.length);
-		
-		Arrays.sort(resp);
-		return resp;
-	}
-	
-	public static int getNeighborhoodID(String neighboordHood, String [] originalNeighborhoods){
-		List<String> list = Arrays.asList(originalNeighborhoods);
-		return list.indexOf(neighboordHood) + 1;
-	}
+//	public static int getNeighborhoodID(String neighboordHood, String [] originalNeighborhoods){
+//		List<String> list = Arrays.asList(originalNeighborhoods);
+//		return list.indexOf(neighboordHood) + 1;
+//	}
 	
 //	@Override
 //	protected void onStart() {
@@ -105,7 +104,7 @@ public class SolicitationInfoScreen extends Activity implements OnItemSelectedLi
 		}
 	}
 	
-	private static boolean isEmpty(TextView tv){
+	private static boolean isEmpty(EditText tv){
 		return tv.getText().toString().length() == 0;
 	}
 	
@@ -113,7 +112,34 @@ public class SolicitationInfoScreen extends Activity implements OnItemSelectedLi
 		
 	}
 	
+	private void showToast(String message){
+		Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+	}
+	
 	public void send(View v){
+		if(isEmpty(streetField)){
+			streetField.requestFocus();
+			showToast("Por favor, informe um endereço.");
+			
+		} else if(isEmpty(numberField)){
+			numberField.requestFocus();
+			showToast("Por favor, informe um número.");
+		} else {
+			String facebookID = MainScreen.meUser.getId();
+			String street = streetField.getText().toString();
+			String number = numberField.getText().toString();
+			String description = commentsField.getText().toString();
+			String reference = referenceField.getText().toString();
+			String neighborhoodID = NeighHelper.getInstance(this).getID(neighborhoodSpinner.getSelectedItemPosition()) + "";
+			String code = "10";
+			FetchTask r = FetchTask.makeRequestTask(facebookID, street, number, description, reference, neighborhoodID, code, this);
+			
+			pd = ProgressDialog.show(this, "Enviando", "Aguarde, enviando sua solicitação...");
+			r.execute();
+		}
+	}
+	
+	public void showResult(){
 		Intent i = new Intent(this, SolicitationResultScreen.class);
 		i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 		startActivity(i);
@@ -122,8 +148,9 @@ public class SolicitationInfoScreen extends Activity implements OnItemSelectedLi
 
 	@Override
 	public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long arg3) {
-		int index = getNeighborhoodID(sortedNeighborhoods[position], originalNeighborhoods);
-		Log.d("", "index of " + sortedNeighborhoods[position] + " is " + index);
+		NeighHelper h = NeighHelper.getInstance(this);
+		int index = h.getID(position);
+//		Log.d("", "index of " + sortedNeighborhoods[position] + " is " + index);
 		
 	}
 
@@ -131,6 +158,21 @@ public class SolicitationInfoScreen extends Activity implements OnItemSelectedLi
 	public void onNothingSelected(AdapterView<?> arg0) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void onResult(boolean success, JSONObject response) {
+		Log.d("", "solicitation response: " + response);
+		pd.dismiss();
+		if(success){
+			try {
+				String protocol = response.getString("protocol_code");
+				SolicitationResultScreen.protocol = protocol;
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+			showResult();
+		}
 	}
 	
 	

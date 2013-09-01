@@ -1,28 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_gradient"
     android:orientation="vertical" >
 
-    <ImageView
-        android:id="@+id/solicitationPreview"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="54dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/ic_launcher" />
+    <TextView
+        android:id="@+id/rankNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Selecione o tipo de serviço:"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <RelativeLayout
         android:id="@+id/relativeLayout1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/rankNumber"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.5"
         android:layout_margin="10sp"
         android:background="@drawable/round_rect_white" >
 
@@ -46,7 +40,7 @@
                     android:background="@drawable/round_rect"
                     android:drawableTop="@drawable/pole"
                     android:onClick="makeLightRequest"
-                    android:paddingTop="10dp"
+                    android:paddingTop="1dp"
                     android:text="Iluminação pública" />
 
                 <Button
@@ -58,7 +52,7 @@
                     android:background="@drawable/round_rect"
                     android:drawableTop="@drawable/asphalt"
                     android:onClick="makeStreetRequest"
-                    android:paddingTop="10dp"
+                    android:paddingTop="1dp"
                     android:text="Conservação de vias" />
             </LinearLayout>
 
@@ -77,7 +71,7 @@
                     android:background="@drawable/round_rect"
                     android:drawableTop="@drawable/no_parking"
                     android:onClick="makeParkingRequest"
-                    android:paddingTop="10dp"
+                    android:paddingTop="1dp"
                     android:text="Estacionamento irregular" />
 
                 <Button
@@ -89,19 +83,33 @@
                     android:background="@drawable/round_rect"
                     android:drawableTop="@drawable/tree"
                     android:onClick="makeTreeRequest"
-                    android:paddingTop="10dp"
+                    android:paddingTop="1dp"
                     android:text="Poda de Árvores" />
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/rankNumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/solicitationPreview"
-        android:layout_alignLeft="@+id/relativeLayout1"
-        android:text="Selecione o tipo de serviço:"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+    <LinearLayout
+        android:id="@+id/problemLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.5"
+        android:orientation="vertical" >
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/problemName"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Especifique o tipo de problema:"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <ListView
+            android:cacheColorHint="#00000000"
+            android:id="@+id/problemList"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+        </ListView>
+
+    </LinearLayout>
+
+</LinearLayout>

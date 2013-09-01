@@ -53,6 +53,17 @@ public class FetchTask extends AsyncTask<Void, Void, JSONObject> {
 				"facebook", facebookID);
 	}
 	
+	public static FetchTask makeRequestTask(String facebookID, String street, String number, String description, String reference, String neighborhoodID, String code, FetchCallback callback){
+		return new FetchTask("requests/create.json", callback, false,
+				"address", street,
+				"number", number,
+				"description", description,
+				"reference", reference,
+				"neighborhood", neighborhoodID,
+				"type", code,
+				"facebook", facebookID);
+	}
+	
 	public static FetchTask neighborhoodRankTask(int id, FetchCallback callback) {
 		return new FetchTask("ranking/neighborhood.json?neighborhood="+id, callback, true);
 	}

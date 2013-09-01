@@ -75,6 +75,15 @@
                 android:src="@drawable/surprise" />
         </RelativeLayout>
 
+        <TextView
+            android:id="@+id/protocolTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rankNumber"
+            android:layout_centerHorizontal="true"
+            android:text="O protocolo gerado foi: DDDD"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
     </RelativeLayout>
 
 </RelativeLayout>
