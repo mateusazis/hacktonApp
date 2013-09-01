@@ -1,33 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/scrollView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+<RelativeLayout 
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@drawable/bg_gradient" >
     
     <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="10sp">
 
     <Button
         android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@id/comments"
         android:layout_centerHorizontal="true"
         android:drawableLeft="@drawable/send"
         android:onClick="send"
         android:text="Enviar" />
 
     <EditText
-        android:id="@+id/editText2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/button1"
-        android:layout_alignParentLeft="true"
+        android:id="@+id/comments"
+        android:layout_width="fill_parent"
+        android:layout_height="200sp"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/textView1"
         android:ems="10"
+        android:gravity="top"
         android:hint="(opcional)"
         android:inputType="textMultiLine" >
 
@@ -50,7 +54,7 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/addressField"
+            android:id="@+id/streetField"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -70,7 +74,7 @@
 	            android:textStyle="bold" />
 
 	        <EditText
-	            android:id="@+id/editText1"
+	            android:id="@+id/addressNumber"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:layout_weight="1"
@@ -104,7 +108,9 @@
         android:id="@+id/relativeLayout2"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/relativeLayout1">
+        android:padding="5sp"
+        android:layout_below="@id/relativeLayout1"
+        android:background="@drawable/round_rect" >
 
         <TextView
             android:id="@+id/xpText"
@@ -153,4 +159,16 @@
         android:textStyle="bold" />
 
 </RelativeLayout>
+
+    
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+        </LinearLayout>
+    
+
 </RelativeLayout>
+
+</ScrollView>

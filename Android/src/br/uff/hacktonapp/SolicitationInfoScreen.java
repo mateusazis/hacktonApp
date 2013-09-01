@@ -29,7 +29,7 @@ public class SolicitationInfoScreen extends Activity implements OnItemSelectedLi
 
 	private ProgressBar addressBar;
 	private Button useButton;
-	private TextView addressField;
+	private TextView streetField, numberField, commentsField;
 	private Spinner neighborhoodSpinner;
 	private static String suggestedAddress = null;
 	
@@ -46,7 +46,9 @@ public class SolicitationInfoScreen extends Activity implements OnItemSelectedLi
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.info_layout);
-		addressField = (TextView)findViewById(R.id.addressField);
+		streetField = (TextView)findViewById(R.id.streetField);
+		numberField = (TextView)findViewById(R.id.addressNumber);
+		commentsField = (TextView)findViewById(R.id.comments);
 		useButton = (Button)findViewById(R.id.localizationButton);
 		addressBar = (ProgressBar)findViewById(R.id.localizationBar);
 		neighborhoodSpinner = (Spinner)findViewById(R.id.neighborhoodSpinner);
@@ -85,8 +87,8 @@ public class SolicitationInfoScreen extends Activity implements OnItemSelectedLi
 	public void setFoundAddress(String address){
 		addressBar.setVisibility(View.INVISIBLE);
 		useButton.setEnabled(true);
-		if(isEmpty(addressField)){
-			addressField.setText(suggestedAddress);
+		if(isEmpty(streetField)){
+			streetField.setText(suggestedAddress);
 		}
 	}
 	
