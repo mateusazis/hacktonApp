@@ -39,10 +39,10 @@ public class MainActivity extends Activity implements StatusCallback, GraphUserC
 		loaderText = (TextView)findViewById(R.id.loaderText);
 		
 		Session s = Session.getActiveSession();
-//		if(s != null){
-//			s.closeAndClearTokenInformation();
-//			Log.d("", "closed and cleared token info");
-//		}
+		if(s != null){
+			s.closeAndClearTokenInformation();
+			Log.d("", "closed and cleared token info");
+		}
 		
 //		if(isOpen(s))
 //			loadMainScreen();
@@ -63,7 +63,7 @@ public class MainActivity extends Activity implements StatusCallback, GraphUserC
 	private void setupLogin(){
 		Log.d("", "setup login");
 		
-		List<String> permissions = Arrays.asList("email");
+		List<String> permissions = Arrays.asList("email", "photo_upload");
 		
 		button.setReadPermissions(permissions);
 		button.setSessionStatusCallback(this);
