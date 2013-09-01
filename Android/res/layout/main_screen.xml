@@ -131,15 +131,6 @@
             android:onClick="makeSolicitation"
             android:text="Fazer solicitação" />
 
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:drawableTop="@drawable/list"
-            android:onClick="viewSolicitations"
-            android:text="Minhas solicitações" />
-
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
