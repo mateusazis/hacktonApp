@@ -7,6 +7,10 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URL;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.facebook.Session;
 import com.facebook.Session.StatusCallback;
 import com.facebook.SessionState;
@@ -14,17 +18,20 @@ import com.facebook.model.GraphUser;
 import com.facebook.widget.LoginButton;
 
 import android.app.*;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.MediaStore.MediaColumns;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -54,8 +61,15 @@ public class MainScreen extends Activity implements StatusCallback{
 		l.setSessionStatusCallback(this);
 		setup();
 		
+		checkNotifications();
 	}
 	
+	private void checkNotifications() {
+		FetchTask ft = FetchTask.getNotifications(meUser.getId(), new NotificationsCallback());
+		ft.execute();
+//		new NotificationsCallback().onResult(false, null);
+	}
+
 	private void setup(){
 		if(meUser != null){
 			nameView.setText(meUser.getName());
@@ -78,9 +92,6 @@ public class MainScreen extends Activity implements StatusCallback{
 		}
 	}
 	
-//	public void logout(View v){
-//		finish();
-//	}
 	
 	public static void setUserPictureAsync(final ImageView view, String userID, final Activity act){
 		try {
@@ -113,12 +124,6 @@ public class MainScreen extends Activity implements StatusCallback{
 	}
 	
 	public void makeSolicitation(View v){ 
-//		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//		builder.setMessage("Deseja incluir uma foto?\n\nVocê pode compartilhá-la mais tarde com seus amigos!").setTitle("Foto");
-//		builder.setPositiveButton("OK", new AddPictureListener(true));
-//		builder.setNegativeButton("Não agora", new AddPictureListener(false));
-//		AlertDialog dialog = builder.create();
-//		dialog.show();
 		selectImage();
 	}
 	
@@ -169,23 +174,6 @@ public class MainScreen extends Activity implements StatusCallback{
 		startActivity(i);
 	}
 	
-//	@Override
-//	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//		// TODO Auto-generated method stub
-//		super.onActivityResult(requestCode, resultCode, data);
-//		if(resultCode == RESULT_OK){
-//			Bundle extras = data.getExtras();
-//		    SolicitationScreen.pictureBitmap = (Bitmap) extras.get("data");
-//			
-//			Intent i = new Intent(this, SolicitationScreen.class);
-//			i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-//			startActivity(i);
-//			SlideTransition.forwardTransition(this);
-//		} else{
-//			Toast.makeText(this, "Nenhuma foto tirada.", Toast.LENGTH_SHORT).show();
-//		}
-//	}
-	
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Bitmap bm = null;
@@ -203,24 +191,7 @@ public class MainScreen extends Activity implements StatusCallback{
                     BitmapFactory.Options btmapOptions = new BitmapFactory.Options();
                     bm = BitmapFactory.decodeFile(f.getAbsolutePath(),
                             btmapOptions);
-                    // bm = Bitmap.createScaledBitmap(bm, 70, 70, true);
-//                    String path = android.os.Environment
-//                            .getExternalStorageDirectory()
-//                            + File.separator
-//                            + "Phoenix" + File.separator + "default";
-//                    f.delete();
-//                    OutputStream fOut = null;
-//                    File file = new File(path, String.valueOf(System
-//                            .currentTimeMillis()) + ".jpg");
                     try {
-//                        fOut = new FileOutputStream(file);
-//                        bm.compress(Bitmap.CompressFormat.JPEG, 85, fOut);
-//                        fOut.flush();
-//                        fOut.close();
-//                    } catch (FileNotFoundException e) {
-//                        e.printStackTrace();
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -284,6 +255,54 @@ public class MainScreen extends Activity implements StatusCallback{
 	public void call(Session session, SessionState state, Exception exception) {
 		if(session.isClosed())
 			finish();
+		
+	}
+	
+	private class NotificationsCallback implements FetchCallback {
+
+		@Override
+		public void onResult(boolean success, JSONObject response) {
+			
+			Log.d("", "notification: " + response);
+			try {
+				JSONArray array = response.getJSONArray("notifications");
+				int notificationsCount = array.length();
+				for(int i = 0; i < notificationsCount; i++){
+					JSONObject obj = array.getJSONObject(i);
+					int organization = obj.getInt("organization");
+					int drawable = R.drawable.logo_1746;
+					switch(organization){
+					case 0: //comlurb
+						drawable = R.drawable.tree;
+						break;
+					case 1: //conservação via
+						drawable = R.drawable.asphalt;
+						break;
+					case 2: //rio luz
+						drawable = R.drawable.pole;
+						break;
+					case 3: //estacionamento
+						drawable = R.drawable.no_parking;
+						break;
+					}
+					String title = "1746 Informa";
+					String msg = obj.getString("description");
+					
+					
+					NotificationCompat.Builder b = new NotificationCompat.Builder(MainScreen.this);
+					b.setSmallIcon(drawable).setContentTitle(title).setContentText(msg);
+					b.setOnlyAlertOnce(true);
+					NotificationManager mNotificationManager =
+						    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+						// mId allows you to update the notification later on.
+						mNotificationManager.notify(i, b.build());
+				}
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 		
 	}
 }
