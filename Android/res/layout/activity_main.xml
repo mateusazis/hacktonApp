@@ -28,6 +28,7 @@
         android:layout_above="@+id/loginButton1"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="15dp"
+        android:gravity="center_horizontal"
         android:text="Entre com sua conta do Facebook:"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#F3F3F3" />
@@ -38,6 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="62dp"
         android:text="Buscando dados..."
         android:textAppearance="?android:attr/textAppearanceMedium" />
 

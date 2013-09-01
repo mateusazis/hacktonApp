@@ -3,7 +3,11 @@ package br.uff.hacktonapp;
 import java.io.IOException;
 import java.net.URL;
 
+import com.facebook.Session;
+import com.facebook.Session.StatusCallback;
+import com.facebook.SessionState;
 import com.facebook.model.GraphUser;
+import com.facebook.widget.LoginButton;
 
 import android.app.*;
 import android.content.DialogInterface;
@@ -20,7 +24,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainScreen extends Activity{
+public class MainScreen extends Activity implements StatusCallback{
 
 	public static GraphUser meUser;
 	private TextView nameView;
@@ -34,7 +38,10 @@ public class MainScreen extends Activity{
 		nameView = (TextView)findViewById(R.id.profileName);
 		pictureView = (ImageView)findViewById(R.id.profileImage);
 		
+		LoginButton l = (LoginButton)findViewById(R.id.loginButton1);
+		l.setSessionStatusCallback(this);
 		setup();
+		
 	}
 	
 	private void setup(){
@@ -54,6 +61,10 @@ public class MainScreen extends Activity{
 			Log.e("", e.getMessage());
 		}
 	}
+	
+//	public void logout(View v){
+//		finish();
+//	}
 	
 	public static void setUserPictureAsync(final ImageView view, String userID, final Activity act){
 		try {
@@ -149,6 +160,13 @@ public class MainScreen extends Activity{
 			}
 			
 		}
+		
+	}
+
+	@Override
+	public void call(Session session, SessionState state, Exception exception) {
+		if(session.isClosed())
+			finish();
 		
 	}
 }

@@ -55,6 +55,15 @@ public class MainActivity extends Activity implements StatusCallback, GraphUserC
 	}
 	
 	@Override
+	protected void onRestart() {
+		super.onRestart();
+		if(Session.getActiveSession().isClosed())
+			setupLogin();
+		else
+			requestUserData();
+	}
+	
+	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		Session s = Session.getActiveSession();	
@@ -62,6 +71,8 @@ public class MainActivity extends Activity implements StatusCallback, GraphUserC
 	}
 	
 	private void setupLogin(){
+		setVisible(R.id.loginButton1, true);
+		setVisible(R.id.rankNumber, true);
 		Log.d("", "setup login");
 		
 		List<String> permissions = Arrays.asList("email", "photo_upload");
@@ -108,7 +119,7 @@ public class MainActivity extends Activity implements StatusCallback, GraphUserC
 	}
 	
 	private void requestUserData(){
-		button.setEnabled(false);
+//		button.setEnabled(false);
 		setVisible(R.id.loader1, true);
 		setVisible(R.id.loaderText, true);
 		setVisible(R.id.loginButton1, false);

@@ -36,7 +36,8 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
 			android:label="@string/app_name"
 			android:screenOrientation="portrait"></activity>
-        <activity android:name="br.uff.hacktonapp.MainScreen">
+        <activity android:name="br.uff.hacktonapp.MainScreen"
+            android:screenOrientation="portrait">
             
         </activity>
         

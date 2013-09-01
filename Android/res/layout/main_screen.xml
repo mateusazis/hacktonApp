@@ -46,6 +46,7 @@
             android:layout_alignBottom="@+id/profileImage"
             android:layout_alignLeft="@+id/level_layout"
             android:layout_alignRight="@+id/level_layout"
+            android:onClick="logout"
             fb:login_text="Entrar"
             fb:logout_text="Sair" />
 

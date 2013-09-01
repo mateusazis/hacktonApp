@@ -39,6 +39,7 @@ public class SolicitationInfoScreen extends Activity implements OnItemSelectedLi
 	private EditText streetField, numberField, commentsField, referenceField;
 	private Spinner neighborhoodSpinner;
 	private ProgressDialog pd;
+	public static UrbanProblem problem;
 	
 	
 	private static String suggestedAddress = null;

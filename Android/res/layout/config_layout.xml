@@ -14,7 +14,7 @@
         android:layout_margin="10sp"
         android:background="@drawable/round_rect"
         android:gravity="center_horizontal|center_vertical"
-        android:text="Configurações"
+        android:text="Meus dados"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <Spinner
@@ -60,5 +60,95 @@
             android:text="Cancelar" />
 
     </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/RelativeLayout01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/spinner1" >
+
+        <TextView
+            android:id="@+id/TextView02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:gravity="center_vertical"
+            android:text="Experiência: "
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/TextView02"
+            android:orientation="horizontal" >
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <ImageView
+                    android:id="@+id/ImageView01"
+                    android:layout_width="40sp"
+                    android:layout_height="40sp"
+                    android:src="@drawable/star" />
+
+                <TextView
+                    android:id="@+id/TextView01"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/ImageView01"
+                    android:layout_alignLeft="@+id/ImageView01"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignRight="@+id/ImageView01"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="2"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+            </RelativeLayout>
+
+            
+
+            <ProgressBar
+                android:id="@+id/localizationBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.8" />
+
+            <TextView
+                android:id="@+id/percentageText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="45% "
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+            
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <ImageView
+                    android:id="@+id/starLeft"
+                    android:layout_width="40sp"
+                    android:layout_height="40sp"
+                    android:src="@drawable/star" />
+
+                <TextView
+                    android:id="@+id/TextView03"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/starLeft"
+                    android:layout_alignLeft="@id/starLeft"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignRight="@id/starLeft"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="2"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+    </RelativeLayout>
 
 </RelativeLayout>
