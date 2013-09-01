@@ -25,19 +25,27 @@ public class SolicitationScreen extends Activity{
 	}
 	
 	public void makeStreetRequest(View v){
+		setFacebookRequestName("conserto de via pública", "um");
 		loadInfoScreen();
 	}
 	
 	public void makeLightRequest(View v){
+		setFacebookRequestName("reparo de iluminação pública", "um");
 		loadInfoScreen();
 	}
 
 	public void makeParkingRequest(View v){
+		setFacebookRequestName("solicitação de estacionamento irregular", "uma");
 		loadInfoScreen();
 	}
 	
 	public void makeTreeRequest(View v){
+		setFacebookRequestName("poda de árvore", "uma");
 		loadInfoScreen();
+	}
+	
+	public static void setFacebookRequestName(String name, String pronoum){
+		SolicitationResultScreen.setSolicitationName(name, pronoum);
 	}
 	
 	public void loadInfoScreen(){

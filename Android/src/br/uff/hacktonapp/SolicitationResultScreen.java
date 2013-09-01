@@ -26,7 +26,8 @@ public class SolicitationResultScreen extends Activity implements Callback {
 //	private ImageView picture;
 	private TextView xpText;
 	private ProgressDialog progressDialog;
-	private String solicitationName = "poda de árvore";
+	public static String solicitationName;
+	private static String solicitationPronoum;
 	
 	
 	@Override
@@ -64,7 +65,7 @@ public class SolicitationResultScreen extends Activity implements Callback {
 			Bundle params = r.getParameters();
 			
 			
-			String message = String.format("Eu solicitei uma %s ao 1746! Ajude também e veja quem é o cidadão mais ativo! Baixe o aplicativo gratuitamente em http://bit.ly/abcde", solicitationName);
+			String message = String.format("Eu solicitei %s %s ao 1746! Ajude também e veja quem é o cidadão mais ativo! Baixe o aplicativo gratuitamente em http://bit.ly/abcde", solicitationPronoum, solicitationName);
 			params.putString("message", message);
 			
 			progressDialog = ProgressDialog.show(this, "Compartilhando", "Aguarde enquanto a foto é enviada...");
@@ -87,6 +88,12 @@ public class SolicitationResultScreen extends Activity implements Callback {
 		String txt = "Publicado com sucesso!";
 		Toast.makeText(this, txt, Toast.LENGTH_SHORT).show();
 		goBack(null);
+	}
+
+	public static void setSolicitationName(String name, String pronoum) {
+		solicitationName = name;
+		solicitationPronoum = pronoum;
+		
 	}
 	
 }

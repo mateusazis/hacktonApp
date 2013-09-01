@@ -1,6 +1,7 @@
 package br.uff.hacktonapp;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 //import com.google.android.gms.common.*;
@@ -15,16 +16,25 @@ import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 
-public class SolicitationInfoScreen extends Activity {
+public class SolicitationInfoScreen extends Activity implements OnItemSelectedListener {
 
 	private ProgressBar addressBar;
 	private Button useButton;
 	private TextView addressField;
+	private Spinner neighborhoodSpinner;
 	private static String suggestedAddress = null;
+	
+	private String [] sortedNeighborhoods;
+	private String [] originalNeighborhoods;
 	
 //	private LocationClient client;
 	
@@ -39,9 +49,25 @@ public class SolicitationInfoScreen extends Activity {
 		addressField = (TextView)findViewById(R.id.addressField);
 		useButton = (Button)findViewById(R.id.localizationButton);
 		addressBar = (ProgressBar)findViewById(R.id.localizationBar);
+		neighborhoodSpinner = (Spinner)findViewById(R.id.neighborhoodSpinner);
 		
+		
+		sortedNeighborhoods = getResources().getStringArray(R.array.neighborhoods);
+		originalNeighborhoods = new String[sortedNeighborhoods.length];
+		System.arraycopy(sortedNeighborhoods, 0, originalNeighborhoods, 0, originalNeighborhoods.length);
+		
+		Arrays.sort(sortedNeighborhoods);
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, sortedNeighborhoods);
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		neighborhoodSpinner.setAdapter(adapter);
+		neighborhoodSpinner.setOnItemSelectedListener(this);
 //		LocationListener listener = new LocationListener();
 //		client = new LocationClient(this, listener, listener);
+	}
+	
+	public int getNeighborhoodID(String neighboordHood){
+		List<String> list = Arrays.asList(originalNeighborhoods);
+		return list.indexOf(neighboordHood) + 1;
 	}
 	
 //	@Override
@@ -77,6 +103,19 @@ public class SolicitationInfoScreen extends Activity {
 		i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 		startActivity(i);
 		SlideTransition.forwardTransition(this);
+	}
+
+	@Override
+	public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long arg3) {
+		int index = getNeighborhoodID(sortedNeighborhoods[position]);
+		Log.d("", "index of " + sortedNeighborhoods[position] + " is " + index);
+		
+	}
+
+	@Override
+	public void onNothingSelected(AdapterView<?> arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	
