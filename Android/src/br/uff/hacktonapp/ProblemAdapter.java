@@ -3,6 +3,7 @@ package br.uff.hacktonapp;
 
 
 import android.app.Activity;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +37,7 @@ View row = convertView;
         ImageView pictureView = (ImageView)row.findViewById(R.id.problemImage);
         
         UrbanProblem b = objects[position];
-        nameView.setText(b.description);
+        nameView.setText(Html.fromHtml(b.description));
         pictureView.setImageResource(b.getDrawableResource());
 
         return row;

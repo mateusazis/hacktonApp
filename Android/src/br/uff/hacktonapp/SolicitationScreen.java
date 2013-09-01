@@ -4,16 +4,16 @@ import android.app.*;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ImageView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
-public class SolicitationScreen extends Activity implements OnItemSelectedListener{
+public class SolicitationScreen extends Activity implements OnItemClickListener{
 
-	private ImageView picturePreview;
+//	private ImageView picturePreview;
 	public static Bitmap pictureBitmap;
 	private LinearLayout problemLayout;
 	private ListView problemList;
@@ -31,12 +31,13 @@ public class SolicitationScreen extends Activity implements OnItemSelectedListen
 		problemLayout = (LinearLayout)findViewById(R.id.problemLayout);
 		problemLayout.setVisibility(View.INVISIBLE);
 		problemList = (ListView)findViewById(R.id.problemList);
-		problemList.setOnItemSelectedListener(this);
+		
 	}
 	
 	public void setProblems(UrbanProblem [] problems){
 		ProblemAdapter adapter = new ProblemAdapter(this, R.layout.layout_problem, problems);
 		problemList.setAdapter(adapter);
+		problemList.setOnItemClickListener(this);
 		problemLayout.setVisibility(View.VISIBLE);
 	}
 	
@@ -49,7 +50,6 @@ public class SolicitationScreen extends Activity implements OnItemSelectedListen
 		setProblems(p);
 		setFacebookRequestName("conserto de via pública", "um");
 		SolicitationInfoScreen.requestType = RequestType.STREET;
-		loadInfoScreen();
 	}
 	
 	public void makeLightRequest(View v){
@@ -61,7 +61,6 @@ public class SolicitationScreen extends Activity implements OnItemSelectedListen
 			setProblems(p);
 		setFacebookRequestName("reparo de iluminação pública", "um");
 		SolicitationInfoScreen.requestType = RequestType.LIGTH;
-		loadInfoScreen();
 	}
 
 	public void makeParkingRequest(View v){
@@ -75,7 +74,6 @@ public class SolicitationScreen extends Activity implements OnItemSelectedListen
 			setProblems(p);
 		setFacebookRequestName("solicitação de estacionamento irregular", "uma");
 		SolicitationInfoScreen.requestType = RequestType.PARK;
-		loadInfoScreen();
 	}
 	
 	public void makeTreeRequest(View v){
@@ -86,7 +84,6 @@ public class SolicitationScreen extends Activity implements OnItemSelectedListen
 			setProblems(p);
 		setFacebookRequestName("poda de árvore", "uma");
 		SolicitationInfoScreen.requestType = RequestType.TREE;
-		loadInfoScreen();
 	}
 	
 	public static void setFacebookRequestName(String name, String pronoum){
@@ -97,21 +94,16 @@ public class SolicitationScreen extends Activity implements OnItemSelectedListen
 		Intent i = new Intent(this, SolicitationInfoScreen.class);
 		i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 		startActivity(i);
-		SlideTransition.forwardTransition(this);
-		
+		SlideTransition.forwardTransition(this);		
 	}
 
+
 	@Override
-	public void onItemSelected(AdapterView<?> arg0, View arg1, int position,
-			long arg3) {
+	public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+		Log.d("", "item selected");
 		UrbanProblem p = (UrbanProblem) problemList.getItemAtPosition(position);
 		SolicitationInfoScreen.problem = p;
 		loadInfoScreen();
-	}
-
-	@Override
-	public void onNothingSelected(AdapterView<?> arg0) {
-		// TODO Auto-generated method stub
 		
 	}
 	
