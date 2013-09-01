@@ -27,8 +27,12 @@ import android.widget.Toast;
 public class MainScreen extends Activity implements StatusCallback{
 
 	public static GraphUser meUser;
+	public static String userLevelName;
+	public static int userLevelNumber;
+	public static float userRelativeXP;
 	private TextView nameView;
 	private ImageView pictureView;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +52,10 @@ public class MainScreen extends Activity implements StatusCallback{
 		if(meUser != null){
 			nameView.setText(meUser.getName());
 			setUserPicture(pictureView, meUser.getId());
+			TextView tv = (TextView)findViewById(R.id.levelNumber);
+			tv.setText(userLevelNumber + "");
+			tv = (TextView)findViewById(R.id.levelName);
+			tv.setText(userLevelName);
 		}
 	}
 	

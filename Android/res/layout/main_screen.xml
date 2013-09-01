@@ -43,15 +43,16 @@
             android:id="@+id/loginButton1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/profileImage"
-            android:layout_alignLeft="@+id/level_layout"
+            android:layout_alignBottom="@+id/profileName"
+            android:layout_alignLeft="@+id/levelName"
             android:layout_alignRight="@+id/level_layout"
+            android:layout_marginBottom="5sp"
             android:onClick="logout"
             fb:login_text="Entrar"
             fb:logout_text="Sair" />
 
         <TextView
-            android:id="@+id/rankLevel"
+            android:id="@+id/levelName"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/loginButton1"
@@ -90,7 +91,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/TextView01"
+                android:id="@+id/levelNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/star"
@@ -101,46 +102,57 @@
                 android:text="2"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
         </RelativeLayout>
-
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/relativeLayout1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_below="@+id/profileLayout"
         android:layout_centerHorizontal="true" >
 
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/relativeLayout1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="51dp"
+        android:orientation="vertical" >
+
         <Button
             android:id="@+id/button3"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
+            android:layout_weight="0.5"
             android:drawableTop="@drawable/megaphone"
             android:onClick="makeSolicitation"
             android:text="Fazer solicitação" />
 
-        <Button
-            android:id="@+id/localizationButton"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:drawableTop="@drawable/podium"
-            android:onClick="viewRanking"
-            android:text="Ver ranking" />
+            android:layout_weight="0.5"
+            android:orientation="horizontal" >
 
-        <Button
-            android:id="@+id/treeButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:drawableTop="@drawable/info"
-            android:onClick="viewInfo"
-            android:text="Meus dados" />
+            <Button
+                android:id="@+id/treeButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/info"
+                android:onClick="viewInfo"
+                android:text="Meus dados" />
 
-    </RelativeLayout>
+            <Button
+                android:id="@+id/localizationButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/podium"
+                android:onClick="viewRanking"
+                android:text="Ver ranking" />
+        </LinearLayout>
+    </LinearLayout>
 
 </RelativeLayout>

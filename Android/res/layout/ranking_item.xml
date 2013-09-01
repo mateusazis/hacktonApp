@@ -68,7 +68,7 @@
             android:src="@drawable/star" />
 
         <TextView
-            android:id="@+id/rankLevel"
+            android:id="@+id/levelName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/imageView2"

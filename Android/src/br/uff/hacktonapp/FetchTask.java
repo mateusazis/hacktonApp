@@ -48,6 +48,7 @@ public class FetchTask extends AsyncTask<Void, Void, JSONObject> {
 	}
 	
 	public static FetchTask friendsRankTask(String facebookID, String accessToken, int limit, FetchCallback callback){
+		Log.d("", "access token: " + accessToken);
 		return new FetchTask("ranking/friend.json", callback, false,
 				"access_token", accessToken,
 				"facebook", facebookID);

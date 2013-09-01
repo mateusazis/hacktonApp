@@ -4,37 +4,137 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_gradient" >
 
-    <TextView
-        android:id="@+id/protocolTV"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/linearLayout1"
         android:layout_alignParentTop="true"
         android:layout_margin="10sp"
         android:background="@drawable/round_rect"
-        android:gravity="center_horizontal|center_vertical"
-        android:text="Meus dados"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:orientation="vertical" >
 
-    <Spinner
-        android:id="@+id/spinner1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView2"
-        android:layout_alignRight="@+id/protocolTV"
-        android:layout_centerVertical="true" />
+        <TextView
+            android:id="@+id/protocolTV"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_margin="10sp"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="Meus dados"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/spinner1"
-        android:layout_alignLeft="@+id/protocolTV"
-        android:text="Selecione seu bairro:"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        <RelativeLayout
+            android:id="@+id/RelativeLayout01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10sp"
+            android:background="@drawable/round_rect_white"
+            android:padding="3sp" >
+
+            <TextView
+                android:id="@+id/TextView02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:gravity="center_vertical"
+                android:text="Experiência: "
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/TextView02"
+                android:orientation="horizontal" >
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <ImageView
+                        android:id="@+id/ImageView01"
+                        android:layout_width="40sp"
+                        android:layout_height="40sp"
+                        android:src="@drawable/star" />
+
+                    <TextView
+                        android:id="@+id/leftStarText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/ImageView01"
+                        android:layout_alignLeft="@+id/ImageView01"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignRight="@+id/ImageView01"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:text="2"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.8" >
+
+                    <ProgressBar
+                        android:id="@+id/percentageBar"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true" />
+
+                    <TextView
+                        android:id="@+id/percentageText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/percentageBar"
+                        android:layout_centerHorizontal="true"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:text="45% "
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <ImageView
+                        android:id="@+id/starLeft"
+                        android:layout_width="40sp"
+                        android:layout_height="40sp"
+                        android:src="@drawable/star" />
+
+                    <TextView
+                        android:id="@+id/rightStarText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/starLeft"
+                        android:layout_alignLeft="@id/starLeft"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignRight="@id/starLeft"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:text="2"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+                </RelativeLayout>
+            </LinearLayout>
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10sp"
+            android:text="Selecione seu bairro:"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <Spinner
+            android:id="@+id/spinner1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10sp" />
+    </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linearLayout1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -58,107 +158,6 @@
             android:drawableLeft="@drawable/cancel_icon"
             android:onClick="cancel"
             android:text="Cancelar" />
-
     </LinearLayout>
-
-    <RelativeLayout
-        android:padding="3sp"
-        android:id="@+id/RelativeLayout01"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/spinner1"
-        android:background="@drawable/round_rect_white" >
-
-        <TextView
-            android:id="@+id/TextView02"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:gravity="center_vertical"
-            android:text="Experiência: "
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/TextView02"
-            android:orientation="horizontal" >
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
-
-                <ImageView
-                    android:id="@+id/ImageView01"
-                    android:layout_width="40sp"
-                    android:layout_height="40sp"
-                    android:src="@drawable/star" />
-
-                <TextView
-                    android:id="@+id/leftStarText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/ImageView01"
-                    android:layout_alignLeft="@+id/ImageView01"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignRight="@+id/ImageView01"
-                    android:gravity="center_horizontal|center_vertical"
-                    android:text="2"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.8" >
-
-            <ProgressBar
-                android:id="@+id/percentageBar"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true" />
-
-            <TextView
-                android:id="@+id/percentageText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/localizationBar"
-                android:layout_alignRight="@+id/localizationBar"
-                android:layout_centerVertical="true"
-                android:gravity="center_vertical|center_horizontal"
-                android:text="45% "
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-            
-            </RelativeLayout>
-            
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
-
-                <ImageView
-                    android:id="@+id/starLeft"
-                    android:layout_width="40sp"
-                    android:layout_height="40sp"
-                    android:src="@drawable/star" />
-
-                <TextView
-                    android:id="@+id/rightStarText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/starLeft"
-                    android:layout_alignLeft="@id/starLeft"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignRight="@id/starLeft"
-                    android:gravity="center_horizontal|center_vertical"
-                    android:text="2"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            </RelativeLayout>
-        </LinearLayout>
-
-    </RelativeLayout>
 
 </RelativeLayout>
