@@ -8,23 +8,33 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 public class ConfigScreen extends Activity implements OnItemSelectedListener, FetchCallback {
 
 	private Spinner spinner;
 	private ProgressDialog pd;
 	private NeighHelper h;
+	private TextView leftStar, rightStar, levelPctg;
+	private ProgressBar levelProgress;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.config_layout);
-		spinner = (Spinner)findViewById(R.id.neighborhoodSpinner);
-
+		spinner = (Spinner)findViewById(R.id.spinner1);
+		leftStar = (TextView)findViewById(R.id.leftStarText);
+		rightStar = (TextView)findViewById(R.id.rightStarText);
+		levelPctg = (TextView)findViewById(R.id.percentageText);
+		levelProgress = (ProgressBar)findViewById(R.id.percentageBar);
+		
+		
 		h = NeighHelper.getInstance(this);
 		spinner.setAdapter(h.makeAdapter(this));
 //		spinner.setOnItemSelectedListener(this);
@@ -34,13 +44,16 @@ public class ConfigScreen extends Activity implements OnItemSelectedListener, Fe
 	
 	private void requestNeighboorhood(){
 		pd = ProgressDialog.show(this, "Aguarde", "Buscando suas informações...");
-		FetchTask task = FetchTask.neighborhoodRankTask(2, this);
+		FetchTask task = FetchTask.getNeighborhoodTask(MainScreen.meUser.getId(), this);
 		task.execute();
 	}
 	
 	public void submit(View v){
 		pd = ProgressDialog.show(this, "Aguarde", "Salvando suas informações...");
-		FetchTask task = FetchTask.neighborhoodRankTask(2, new SubmissionCallback());
+		int selectedIndex = spinner.getSelectedItemPosition();
+		int id = h.getID(selectedIndex);
+		String fbId = MainScreen.meUser.getId();
+		FetchTask task = FetchTask.setNeighborhoodTask(fbId, ""+id, new SubmissionCallback());
 		task.execute();
 	}
 	
@@ -62,11 +75,17 @@ public class ConfigScreen extends Activity implements OnItemSelectedListener, Fe
 	@Override
 	public void onResult(boolean success, JSONObject response) {
 		//neighborhood retrieved
+		
 		try {
-			String neighborhoodName = response.getString("");
-			String [] options = h.getSorted();
-			int index = Arrays.binarySearch(options, neighborhoodName);
-			spinner.setSelection(index);
+			Log.d("", "response: " + response);
+			int status = response.getInt("status");
+			if(success && status != 2){
+				int neighborhoodID = response.getInt("neighborhood");
+				String neighborhoodName = h.getOriginals()[neighborhoodID-1];
+				String [] options = h.getSorted();
+				int index = Arrays.binarySearch(options, neighborhoodName);
+				spinner.setSelection(index);
+			}
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

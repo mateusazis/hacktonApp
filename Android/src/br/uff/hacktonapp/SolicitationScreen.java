@@ -49,6 +49,7 @@ public class SolicitationScreen extends Activity implements OnItemSelectedListen
 		setProblems(p);
 		setFacebookRequestName("conserto de via pública", "um");
 		SolicitationInfoScreen.requestType = RequestType.STREET;
+		loadInfoScreen();
 	}
 	
 	public void makeLightRequest(View v){
@@ -60,6 +61,7 @@ public class SolicitationScreen extends Activity implements OnItemSelectedListen
 			setProblems(p);
 		setFacebookRequestName("reparo de iluminação pública", "um");
 		SolicitationInfoScreen.requestType = RequestType.LIGTH;
+		loadInfoScreen();
 	}
 
 	public void makeParkingRequest(View v){
@@ -71,6 +73,7 @@ public class SolicitationScreen extends Activity implements OnItemSelectedListen
 			setProblems(p);
 		setFacebookRequestName("solicitação de estacionamento irregular", "uma");
 		SolicitationInfoScreen.requestType = RequestType.PARK;
+		loadInfoScreen();
 	}
 	
 	public void makeTreeRequest(View v){
@@ -82,6 +85,7 @@ public class SolicitationScreen extends Activity implements OnItemSelectedListen
 			setProblems(p);
 		setFacebookRequestName("poda de árvore", "uma");
 		SolicitationInfoScreen.requestType = RequestType.TREE;
+		loadInfoScreen();
 	}
 	
 	public static void setFacebookRequestName(String name, String pronoum){

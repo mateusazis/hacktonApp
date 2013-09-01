@@ -68,6 +68,16 @@ public class FetchTask extends AsyncTask<Void, Void, JSONObject> {
 		return new FetchTask("ranking/neighborhood.json?neighborhood="+id, callback, true);
 	}
 	
+	public static FetchTask getNeighborhoodTask(String id, FetchCallback callback) {
+		return new FetchTask("users/neighborhood.json?facebook="+id, callback, true);
+	}
+	
+	public static FetchTask setNeighborhoodTask(String fbId, String id, FetchCallback callback) {
+		return new FetchTask("users/neighborhood.json", callback, false,
+				"user[facebook]", fbId,
+				"user[neighborhood_id]", id);
+	}
+	
     @Override
     protected JSONObject doInBackground(Void... params) {
         try {
@@ -85,7 +95,7 @@ public class FetchTask extends AsyncTask<Void, Void, JSONObject> {
 	            	nameValuePairs.add(pair);
 	            	
 	            }
-	            post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+	            post.setEntity(new UrlEncodedFormEntity(nameValuePairs, "UTF-8"));
             
             }
             // Execute HTTP Post Request

@@ -37,6 +37,10 @@ public class NeighHelper {
 		return sorted;
 	}
 	
+	public String [] getOriginals(){
+		return originals;
+	}
+	
 	public int getID(String name){
 		List<String> list = Arrays.asList(originals);
 		return list.indexOf(name) + 1;
