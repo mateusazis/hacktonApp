@@ -54,11 +54,12 @@ public class SolicitationInfoScreen extends Activity implements OnItemSelectedLi
 		neighborhoodSpinner = (Spinner)findViewById(R.id.neighborhoodSpinner);
 		
 		
-		sortedNeighborhoods = getResources().getStringArray(R.array.neighborhoods);
-		originalNeighborhoods = new String[sortedNeighborhoods.length];
-		System.arraycopy(sortedNeighborhoods, 0, originalNeighborhoods, 0, originalNeighborhoods.length);
 		
-		Arrays.sort(sortedNeighborhoods);
+		originalNeighborhoods = getNeighborHoods(this);
+//		System.arraycopy(sortedNeighborhoods, 0, originalNeighborhoods, 0, originalNeighborhoods.length);
+//		
+//		Arrays.sort(sortedNeighborhoods);
+		sortedNeighborhoods = getSortedNeighborHoods(originalNeighborhoods);
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, sortedNeighborhoods);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		neighborhoodSpinner.setAdapter(adapter);
@@ -67,7 +68,19 @@ public class SolicitationInfoScreen extends Activity implements OnItemSelectedLi
 //		client = new LocationClient(this, listener, listener);
 	}
 	
-	public int getNeighborhoodID(String neighboordHood){
+	public static String [] getNeighborHoods(Activity act){
+		return act.getResources().getStringArray(R.array.neighborhoods);
+	}
+	
+	public static String [] getSortedNeighborHoods(String [] originals){
+		String resp[] = new String[originals.length];
+		System.arraycopy(originals, 0, resp, 0, originals.length);
+		
+		Arrays.sort(resp);
+		return resp;
+	}
+	
+	public static int getNeighborhoodID(String neighboordHood, String [] originalNeighborhoods){
 		List<String> list = Arrays.asList(originalNeighborhoods);
 		return list.indexOf(neighboordHood) + 1;
 	}
@@ -109,7 +122,7 @@ public class SolicitationInfoScreen extends Activity implements OnItemSelectedLi
 
 	@Override
 	public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long arg3) {
-		int index = getNeighborhoodID(sortedNeighborhoods[position]);
+		int index = getNeighborhoodID(sortedNeighborhoods[position], originalNeighborhoods);
 		Log.d("", "index of " + sortedNeighborhoods[position] + " is " + index);
 		
 	}

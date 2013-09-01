@@ -30,7 +30,7 @@ public class MainActivity extends Activity implements StatusCallback, GraphUserC
 
 	private LoginButton button;
 	private TextView loaderText;
-	private boolean skipExtraData = true;
+	private boolean skipExtraData = false;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -129,7 +129,7 @@ public class MainActivity extends Activity implements StatusCallback, GraphUserC
 	}
 
 	@Override
-	public void onCompleted(GraphUser user, Response response) {
+	public void onCompleted(final GraphUser user, Response response) {
 		//user data obtained
 		MainScreen.meUser = user;
 		
@@ -151,7 +151,7 @@ public class MainActivity extends Activity implements StatusCallback, GraphUserC
 						Log.d("", "email: " + email);
 					}
 					
-					FetchTask task = FetchTask.connectTask("mateus", "a@b.c", "222", "123123", new FetchCallback() {
+					FetchTask task = FetchTask.connectTask(user.getName(), "a@b.c", "222", user.getId(), new FetchCallback() {
 	//					
 						@Override
 						public void onResult(boolean success, JSONObject response) {
