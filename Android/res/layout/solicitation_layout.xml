@@ -22,7 +22,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/textView1"
+        android:layout_below="@+id/rankNumber"
         android:layout_margin="10sp"
         android:background="@drawable/round_rect_white" >
 
@@ -96,7 +96,7 @@
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/rankNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/solicitationPreview"

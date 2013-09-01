@@ -1,5 +1,6 @@
 package br.uff.hacktonapp;
 
+import java.io.IOException;
 import java.net.URL;
 
 import com.facebook.model.GraphUser;
@@ -43,12 +44,42 @@ public class MainScreen extends Activity{
 		}
 	}
 	
-	private static void setUserPicture(ImageView view, String userID){
+	public static void setUserPicture(ImageView view, String userID){
 		URL img_value = null;
 		try {
 			img_value = new URL("http://graph.facebook.com/"+userID+"/picture?type=large ");
 			Bitmap mIcon1 = BitmapFactory.decodeStream(img_value.openConnection().getInputStream());
 			view.setImageBitmap(mIcon1);
+		} catch (Exception e) {
+			Log.e("", e.getMessage());
+		}
+	}
+	
+	public static void setUserPictureAsync(final ImageView view, String userID, final Activity act){
+		try {
+			final URL img_value = new URL("http://graph.facebook.com/"+userID+"/picture?type=large ");
+			new Thread(new Runnable(){
+				@Override
+				public void run() {
+					try {
+						final Bitmap mIcon1 = BitmapFactory.decodeStream(img_value.openConnection().getInputStream());
+						act.runOnUiThread(new Runnable() {
+						
+						@Override
+						public void run() {
+							view.setImageBitmap(mIcon1);
+							
+						}
+					});
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
+			}).start();
+			
+			
 		} catch (Exception e) {
 			Log.e("", e.getMessage());
 		}
@@ -73,7 +104,8 @@ public class MainScreen extends Activity{
 	
 	
 	public void viewRanking(View v){
-		Log.d("", "view ranking");
+		Intent i = new Intent(this, Ranking.class);
+		startActivity(i);
 	}
 
 	public void viewInfo(View v){

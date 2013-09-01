@@ -71,11 +71,11 @@
                     android:layout_width="40sp"
                     android:layout_height="40sp"
                     android:layout_alignParentTop="true"
-                    android:layout_toRightOf="@+id/textView1"
+                    android:layout_toRightOf="@+id/rankNumber"
                     android:src="@drawable/star" />
 
                 <TextView
-                    android:id="@+id/textView1"
+                    android:id="@+id/rankNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"

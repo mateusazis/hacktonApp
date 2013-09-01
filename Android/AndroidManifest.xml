@@ -50,6 +50,7 @@
             android:name="br.uff.hacktonapp.SolicitationResultScreen"> 
             
             </activity>
+        <activity android:name="Ranking"></activity>
     </application>
 
 </manifest>

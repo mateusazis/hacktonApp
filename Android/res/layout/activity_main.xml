@@ -22,7 +22,7 @@
         fb:logout_text="Sair" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/rankNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/loginButton1"

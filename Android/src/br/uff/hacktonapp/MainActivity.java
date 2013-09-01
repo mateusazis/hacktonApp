@@ -112,7 +112,7 @@ public class MainActivity extends Activity implements StatusCallback, GraphUserC
 		setVisible(R.id.loader1, true);
 		setVisible(R.id.loaderText, true);
 		setVisible(R.id.loginButton1, false);
-		setVisible(R.id.textView1, false);
+		setVisible(R.id.rankNumber, false);
 		loaderText.setText("Buscando dados do Facebook...");
 		
 		Session s = Session.getActiveSession();
