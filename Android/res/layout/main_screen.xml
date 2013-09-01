@@ -49,14 +49,25 @@
             fb:login_text="Entrar"
             fb:logout_text="Sair" />
 
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/loginButton1"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/level_layout"
+            android:layout_toRightOf="@+id/profileImage"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="Iniciante"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
         <RelativeLayout
             android:id="@+id/level_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignTop="@+id/profileImage"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="17dp" >
+            android:layout_marginRight="14dp" >
 
             <ImageView
                 android:id="@+id/star"
@@ -90,16 +101,6 @@
                 android:textAppearance="?android:attr/textAppearanceMedium" />
         </RelativeLayout>
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/level_layout"
-            android:layout_toRightOf="@+id/profileImage"
-            android:gravity="center_horizontal"
-            android:text="Iniciante"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
     </RelativeLayout>
 
     <RelativeLayout

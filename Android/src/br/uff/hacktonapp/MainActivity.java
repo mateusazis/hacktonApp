@@ -30,6 +30,7 @@ public class MainActivity extends Activity implements StatusCallback, GraphUserC
 
 	private LoginButton button;
 	private TextView loaderText;
+	private boolean skipExtraData = true;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +40,10 @@ public class MainActivity extends Activity implements StatusCallback, GraphUserC
 		loaderText = (TextView)findViewById(R.id.loaderText);
 		
 		Session s = Session.getActiveSession();
-		if(s != null){
-			s.closeAndClearTokenInformation();
-			Log.d("", "closed and cleared token info");
-		}
+//		if(s != null){
+//			s.closeAndClearTokenInformation();
+//			Log.d("", "closed and cleared token info");
+//		}
 		
 //		if(isOpen(s))
 //			loadMainScreen();
@@ -132,34 +133,39 @@ public class MainActivity extends Activity implements StatusCallback, GraphUserC
 		//user data obtained
 		MainScreen.meUser = user;
 		
-		Request r = new Request(Session.getActiveSession(), "/me?fields=email");
-		
-		r.setCallback(new Request.Callback() {
-			@Override
-			public void onCompleted(Response response) {
-				//e-mail retrieved
-				GraphObject obj = response.getGraphObject();
-				Log.d("", "response: " + response.toString());
-				String email = "teste@teste.com";
-				if(obj != null){
-					email = (String)obj.getProperty("email");
-					Log.d("", "email: " + email);
-				}
-				
-				FetchTask task = FetchTask.connectTask("mateus", "a@b.c", "222", "123123", new FetchCallback() {
-//					
-					@Override
-					public void onResult(boolean success, JSONObject response) {
-						if(success)
-							on1746UserRetrieved(response);
+		if(skipExtraData)
+			on1746UserRetrieved(null);
+		else{
+			
+			Request r = new Request(Session.getActiveSession(), "/me?fields=email");
+			
+			r.setCallback(new Request.Callback() {
+				@Override
+				public void onCompleted(Response response) {
+					//e-mail retrieved
+					GraphObject obj = response.getGraphObject();
+					Log.d("", "response: " + response.toString());
+					String email = "teste@teste.com";
+					if(obj != null){
+						email = (String)obj.getProperty("email");
+						Log.d("", "email: " + email);
 					}
-				});
-				loaderText.setText("Buscando cadastro no 1746...");
-				task.execute();
-			}
-		});
-		loaderText.setText("Buscando e-mail do Facebook...");
-		r.executeAsync();
+					
+					FetchTask task = FetchTask.connectTask("mateus", "a@b.c", "222", "123123", new FetchCallback() {
+	//					
+						@Override
+						public void onResult(boolean success, JSONObject response) {
+							if(success)
+								on1746UserRetrieved(response);
+						}
+					});
+					loaderText.setText("Buscando cadastro no 1746...");
+					task.execute();
+				}
+			});
+			loaderText.setText("Buscando e-mail do Facebook...");
+			r.executeAsync();
+		}
 	}
 	
 	public void on1746UserRetrieved(JSONObject user){

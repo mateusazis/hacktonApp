@@ -89,8 +89,9 @@ public class MainScreen extends Activity{
 		    SolicitationScreen.pictureBitmap = (Bitmap) extras.get("data");
 			
 			Intent i = new Intent(this, SolicitationScreen.class);
-			SlideTransition.forwardTransition(this);
+			i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 			startActivity(i);
+			SlideTransition.forwardTransition(this);
 		} else{
 			Toast.makeText(this, "Nenhuma foto tirada.", Toast.LENGTH_SHORT).show();
 		}

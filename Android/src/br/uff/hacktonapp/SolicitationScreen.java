@@ -25,28 +25,27 @@ public class SolicitationScreen extends Activity{
 	}
 	
 	public void makeStreetRequest(View v){
-		SlideTransition.forwardTransition(this);
-		Intent i = new Intent(this, SolicitationInfoScreen.class);
-		startActivity(i);
+		loadInfoScreen();
 	}
 	
 	public void makeLightRequest(View v){
-		SlideTransition.forwardTransition(this);
-		Intent i = new Intent(this, SolicitationInfoScreen.class);
-		startActivity(i);
+		loadInfoScreen();
 	}
 
 	public void makeParkingRequest(View v){
-		SlideTransition.forwardTransition(this);
-		Intent i = new Intent(this, SolicitationInfoScreen.class);
-		startActivity(i);
+		loadInfoScreen();
 	}
 	
 	public void makeTreeRequest(View v){
-		SlideTransition.forwardTransition(this);
-		Intent i = new Intent(this, SolicitationInfoScreen.class);
-		startActivity(i);
+		loadInfoScreen();
 	}
 	
+	public void loadInfoScreen(){
+		Intent i = new Intent(this, SolicitationInfoScreen.class);
+		i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+		startActivity(i);
+		SlideTransition.forwardTransition(this);
+		
+	}
 	
 }
